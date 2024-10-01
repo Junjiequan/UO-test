@@ -25,7 +25,6 @@ export function SampleDeclarationContainer(props: {
   sampleCreated?: (sample: SampleWithQuestionary) => void;
   sampleUpdated?: (sample: SampleWithQuestionary) => void;
   sampleEditDone?: () => void;
-  previewMode?: boolean;
 }) {
   const [initialState] = useState(new SampleSubmissionState(props.sample));
 
@@ -59,10 +58,7 @@ export function SampleDeclarationContainer(props: {
 
   return (
     <QuestionaryContext.Provider value={{ state, dispatch }}>
-      <Questionary
-        title={state.sample.title || 'New Sample'}
-        previewMode={props.previewMode}
-      />
+      <Questionary title={state.sample.title || 'New Sample'} />
     </QuestionaryContext.Provider>
   );
 }

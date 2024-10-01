@@ -11,7 +11,7 @@ import {
 import { useDataApi } from 'hooks/common/useDataApi';
 import { ShipmentWithQuestionary } from 'models/questionary/shipment/ShipmentWithQuestionary';
 
-export function createShipmentStub(
+function createShipmentStub(
   creator: Pick<User, 'id'>,
   questionarySteps: QuestionaryStep[],
   templateId: number,
