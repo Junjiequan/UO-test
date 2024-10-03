@@ -31,7 +31,6 @@ export function GenericTemplateContainer(props: {
   ) => void;
   genericTemplateEditDone?: () => void;
   title: string;
-  previewMode?: boolean;
 }) {
   const [initialState] = useState(
     new GenericTemplateSubmissionState(props.genericTemplate)
@@ -67,7 +66,6 @@ export function GenericTemplateContainer(props: {
     <QuestionaryContext.Provider value={{ state, dispatch }}>
       <Questionary
         title={truncateString(state.genericTemplate.title || props.title, 30)}
-        previewMode={props.previewMode}
       />
     </QuestionaryContext.Provider>
   );

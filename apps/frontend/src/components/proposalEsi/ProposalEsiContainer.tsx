@@ -6,7 +6,7 @@ import {
   QuestionaryContext,
   QuestionaryContextType,
 } from 'components/questionary/QuestionaryContext';
-import { QuestionaryStep, TemplateGroupId } from 'generated/sdk';
+import { TemplateGroupId } from 'generated/sdk';
 import { ProposalEsiSubmissionState } from 'models/questionary/proposalEsi/ProposalEsiSubmissionState';
 import { ProposalEsiWithQuestionary } from 'models/questionary/proposalEsi/ProposalEsiWithQuestionary';
 import {
@@ -17,38 +17,6 @@ import useEventHandlers from 'models/questionary/useEventHandlers';
 
 export interface ProposalEsiContextType extends QuestionaryContextType {
   state: ProposalEsiSubmissionState | null;
-}
-export function createESIStub(
-  templateId: number,
-  questionarySteps: QuestionaryStep[]
-): ProposalEsiWithQuestionary {
-  return {
-    id: 0,
-    creatorId: 0,
-    questionaryId: 0,
-    isSubmitted: false,
-    created: new Date(),
-    sampleEsis: [],
-    questionary: {
-      questionaryId: 0,
-      isCompleted: false,
-      templateId: templateId,
-      created: new Date(),
-      steps: questionarySteps,
-    },
-    proposal: {
-      primaryKey: 0,
-      title: '',
-      questionary: {
-        questionaryId: 0,
-        templateId: templateId,
-        created: new Date(),
-        steps: questionarySteps,
-      },
-      proposalId: '',
-      samples: [],
-    },
-  };
 }
 
 const proposalEsiReducer = (
@@ -90,7 +58,6 @@ const proposalEsiReducer = (
 
 export interface ProposalEsiContainerProps {
   esi: ProposalEsiWithQuestionary;
-  previewMode?: boolean;
 }
 export default function ProposalEsiContainer(props: ProposalEsiContainerProps) {
   const [initialState] = useState(new ProposalEsiSubmissionState(props.esi));
@@ -105,10 +72,7 @@ export default function ProposalEsiContainer(props: ProposalEsiContainerProps) {
 
   return (
     <QuestionaryContext.Provider value={{ state, dispatch }}>
-      <Questionary
-        title={'Input for Experiment Safety Form'}
-        previewMode={props.previewMode}
-      />
+      <Questionary title={'Input for Experiment Safety Form'} />
     </QuestionaryContext.Provider>
   );
 }
